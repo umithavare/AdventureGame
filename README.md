@@ -97,6 +97,7 @@ para zirh ve silah kazandigi yerdir. Herhangi bir kısıtlama bulunmamaktadır.
    1. Özellik : Destekleyici Eşyalar Satın Almak 
    2. Silah : Tabanca,Kılıç,Tüfek 
    3. Zırh : Hafif,Orta,Ağır
+   4. İksirler: Sağlık İksiri. Mağazadan satın alınabilir (Bedel: 15, İyileştirme: 25). Envanterden, ana menüdeki "İksir Kullan" seçeneği ile kullanılır.
 
 ## UML CLASS DIAGRAM
 ![img.png](img.png)
