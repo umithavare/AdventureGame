@@ -1,5 +1,7 @@
 package MaceraOyunu;
 
+import Item.Potion; // Import Potion
+import java.util.ArrayList; // For getPotions() - though it returns ArrayList, direct usage here is minimal
 import java.util.Scanner;
 
 public class Player  {
@@ -127,5 +129,47 @@ public class Player  {
         this.setMoney(gameCharacter.getMoney());
         this.setCharName(gameCharacter.getName());
 
+    }
+
+    public void usePotion() {
+        if (!this.getInventory().hasPotions()) {
+            System.out.println("Envanterinizde hic iksir yok!");
+            return;
+        }
+
+        // For now, we assume the player wants to use the first available "Health Potion"
+        // If multiple potion types existed, a selection mechanism would be needed here.
+        Potion potionToUse = null;
+        int potionIndex = -1; // To help remove the correct potion by index if names are not unique
+
+        ArrayList<Potion> currentPotions = this.getInventory().getPotions();
+        for (int i = 0; i < currentPotions.size(); i++) {
+            // Assuming the main Potion is named "Health Potion" as defined in ToolStore
+            if (currentPotions.get(i).getName().equals("Health Potion")) {
+                potionToUse = currentPotions.get(i);
+                potionIndex = i; // Store index in case of duplicate named potions
+                break;
+            }
+        }
+
+        if (potionToUse != null) {
+            if (this.getHealth() == this.getOriginalHealth()) {
+                System.out.println("Sagliginiz zaten maksimumda, iksir kullanmaya gerek yok.");
+                return;
+            }
+
+            int healAmount = potionToUse.getHealAmount();
+            int currentHealth = this.getHealth();
+            int maxHealth = this.getOriginalHealth();
+
+            this.setHealth(Math.min(currentHealth + healAmount, maxHealth));
+            this.getInventory().removePotion(potionToUse); // removePotion should handle object removal
+
+            System.out.println(potionToUse.getName() + " kullandiniz. Caniniz " + healAmount + " artti.");
+            System.out.println("Yeni Saglik: " + this.getHealth() + "/" + this.getOriginalHealth());
+        } else {
+            // This case might occur if inventory has potions, but none are "Health Potion"
+            System.out.println("Kullanilacak uygun bir 'Health Potion' bulunamadi.");
+        }
     }
 }
