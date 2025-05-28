@@ -7,11 +7,14 @@ public class ToolStore extends NormalLoc{
         super(player, "Magaza");
     }
 
-    // Static method to define potions
-    public static Potion[] potions(){
-        Potion[] potionList = new Potion[1];
-        potionList[0] = new Potion(1, "Health Potion", 25, 15);
-        return potionList;
+    // Cached potion array
+    private static final Potion[] cachedPotions = {
+        new Potion(1, "Health Potion", 25, 15)
+    };
+
+    // Static method to return cached potions
+    public static Potion[] potions() {
+        return cachedPotions;
     }
 
     @Override
