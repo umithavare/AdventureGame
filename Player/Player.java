@@ -140,14 +140,12 @@ public class Player  {
         // For now, we assume the player wants to use the first available "Health Potion"
         // If multiple potion types existed, a selection mechanism would be needed here.
         Potion potionToUse = null;
-        int potionIndex = -1; // To help remove the correct potion by index if names are not unique
 
         ArrayList<Potion> currentPotions = this.getInventory().getPotions();
         for (int i = 0; i < currentPotions.size(); i++) {
             // Assuming the main Potion is named "Health Potion" as defined in ToolStore
             if (currentPotions.get(i).getName().equals("Health Potion")) {
                 potionToUse = currentPotions.get(i);
-                potionIndex = i; // Store index in case of duplicate named potions
                 break;
             }
         }
